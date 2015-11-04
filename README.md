@@ -14,6 +14,6 @@ Examples:
 
 Secret: 1234, Proposal: 1245 , Response: ++- because two exact matches (1,2) and one digit match (4)</br>
 Secret: 1234, Proposal: 2002 , Response: -</br> 
-Secret: 1234, Proposal: 2200 , Response: + because 2 has been used once for a digit match, cannot be re-used (rule 6)</br>
+Secret: 1234, Proposal: 2200 , Response: + because exact matches have priority over digit matches (rule 5)</br>
 Secret: 1234, Proposal: 1234 , Response: ++++</br>
 Secret: 2234, Proposal: 2234 , Response: ++++</br>
