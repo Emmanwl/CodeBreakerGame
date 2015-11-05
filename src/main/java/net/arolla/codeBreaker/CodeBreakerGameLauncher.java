@@ -1,5 +1,6 @@
 package net.arolla.codeBreaker;
 
+import java.util.Random;
 import java.util.Scanner;
 
 import net.arolla.codeBreaker.match.ResponseFormatter;
@@ -9,8 +10,6 @@ import net.arolla.codeBreaker.match.ResponseFormatter;
  * 
  */
 public class CodeBreakerGameLauncher {
-
-	private static final String DEFAULT_SECRET_CODE = "9999";
 	
 	private final CodeBreakerGame game;
 
@@ -42,7 +41,12 @@ public class CodeBreakerGameLauncher {
 	}
 
 	private static String getSecretCode(String[] args) {
-		return (args.length > 0 ? args[0] : DEFAULT_SECRET_CODE);
+		String secreteCode;
+		if (args.length == 0)
+			secreteCode = Integer.toString(new Random().nextInt(9999 - 1000 + 1) + 1000);
+		else
+			secreteCode = args[0];
+		return secreteCode;
 	}
 	
 	public static void main(String[] args) {

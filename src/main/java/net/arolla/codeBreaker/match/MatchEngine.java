@@ -6,14 +6,14 @@ package net.arolla.codeBreaker.match;
  */
 public class MatchEngine {
 
-	private final MatchBuilder builder;
+	private final MatchListBuilder builder;
 
 	public MatchEngine(String secreteCode) {
-		this.builder = new MatchBuilder(secreteCode);
+		this.builder = new MatchListBuilder(secreteCode);
 	}
 
 	public ResponseFormatter getResponseFormatter(String guess) {
 		builder.buildAll(guess);
-		return new ResponseFormatter(builder.getMatchResults(), builder.getMatchSize());
+		return new ResponseFormatter(builder.getResultMatch(), builder.getExpectedMatchSize());
 	}
 }

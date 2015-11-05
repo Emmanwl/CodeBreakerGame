@@ -1,20 +1,10 @@
 package net.arolla.codeBreaker.match;
 
-import java.util.Comparator;
-
 /**
  * @author Emmanuel
  * 
  */
 public final class Match {
-
-	public final static Comparator<Match> sortByPosition = new Comparator<Match>() {
-
-		@Override
-		public int compare(Match m1, Match m2) {
-			return Integer.compare(m1.getPosition(), m2.getPosition());
-		}
-	};
 
 	private final int position;
 	private final int value;
@@ -26,10 +16,6 @@ public final class Match {
 
 	public int getPosition() {
 		return this.position;
-	}
-
-	public int getValue() {
-		return this.value;
 	}
 
 	public boolean equalsInValue(Match obj) {
@@ -64,5 +50,4 @@ public final class Match {
 	public String toString() {
 		return position + " # " + value;  
 	}
-
 }

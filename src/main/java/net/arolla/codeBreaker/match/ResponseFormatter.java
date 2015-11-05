@@ -1,8 +1,5 @@
 package net.arolla.codeBreaker.match;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -11,29 +8,26 @@ import java.util.Map;
  */
 public class ResponseFormatter {
 
-	private final Map<Match, MatchType> results;
-	private final List<Match> matches;
-	private final int matchSize;
+	private final Map<Integer, MatchType> results;
+	private final int expectedMatchSize;
 
-	public ResponseFormatter(Map<Match, MatchType> results, int matchSize) {
-		this.matches = new ArrayList<Match>(results.keySet());
+	public ResponseFormatter(Map<Integer, MatchType> results, int expectedMatchSize) {
 		this.results = results;
-		this.matchSize = matchSize;
+		this.expectedMatchSize = expectedMatchSize;
 	}
 
 	public String getMessage() {
-		Collections.sort(matches, Match.sortByPosition);
 		StringBuilder sb = new StringBuilder();
-		for (Match match : matches)
-			sb.append(results.get(match).getSymbol());
+		for (MatchType matchType : results.values())
+			sb.append(matchType.getSymbol());
 		return sb.toString();
 	}
 
 	public boolean matches() {
-		if (matches.size() != matchSize)
+		if (results.values().size() != expectedMatchSize)
 			return false;
-		for (Match match : matches) {
-			if (!MatchType.EXACT.equals(results.get(match)))
+		for (MatchType matchType : results.values()) {
+			if (!matchType.isExact())
 				return false;
 		}
 		return true;
