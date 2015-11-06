@@ -1,5 +1,7 @@
 package net.arolla.codeBreaker;
 
+import net.arolla.codeBreaker.exception.GameException;
+import net.arolla.codeBreaker.exception.GuessException;
 import net.arolla.codeBreaker.match.MatchEngine;
 import net.arolla.codeBreaker.match.ResponseFormatter;
 
@@ -11,15 +13,15 @@ public class CodeBreakerGame {
 
 	private final MatchEngine engine;
 	
-	public CodeBreakerGame(String secreteCode) {
+	public CodeBreakerGame(String secreteCode) throws GameException {
 		if (!isAValidFourDigitNumber(secreteCode))
-			throw new NumberFormatException(Messages.SECRETE_CODE_IS_NOT_A_VALID_FOUR_DIGIT_NUMBER);
+			throw new GameException(Messages.SECRETE_CODE_IS_NOT_A_VALID_FOUR_DIGIT_NUMBER);
 		this.engine = new MatchEngine(secreteCode);
 	}
 
-	public ResponseFormatter playWith(String guess) {
+	public ResponseFormatter playWith(String guess) throws GuessException {
 		if (!isAValidFourDigitNumber(guess))
-			throw new NumberFormatException(Messages.INPUT_IS_NOT_A_VALID_FOUR_DIGIT_NUMBER);
+			throw new GuessException(Messages.INPUT_IS_NOT_A_VALID_FOUR_DIGIT_NUMBER);
 		return engine.getResponseFormatter(guess);
 	}
 	

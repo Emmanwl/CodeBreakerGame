@@ -21,11 +21,4 @@ public enum MatchType {
 	public boolean isExact() {
 		return EXACT.equals(this);
 	}
-	
-	public static String getSymbolSuite(MatchType... matchTypes) {
-		StringBuilder sb = new StringBuilder();
-		for (MatchType matchType : matchTypes)
-			sb.append(matchType.getSymbol());
-		return sb.toString();
-	}
 }

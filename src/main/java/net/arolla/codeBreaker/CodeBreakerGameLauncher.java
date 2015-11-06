@@ -3,6 +3,8 @@ package net.arolla.codeBreaker;
 import java.util.Random;
 import java.util.Scanner;
 
+import net.arolla.codeBreaker.exception.GameException;
+import net.arolla.codeBreaker.exception.GuessException;
 import net.arolla.codeBreaker.match.ResponseFormatter;
 
 /**
@@ -10,10 +12,10 @@ import net.arolla.codeBreaker.match.ResponseFormatter;
  * 
  */
 public class CodeBreakerGameLauncher {
-	
+
 	private final CodeBreakerGame game;
 
-	private CodeBreakerGameLauncher(String secreteCode) {
+	private CodeBreakerGameLauncher(String secreteCode) throws GameException {
 		this.game = new CodeBreakerGame(secreteCode);
 	}
 
@@ -31,7 +33,7 @@ public class CodeBreakerGameLauncher {
 						System.out.println(Messages.CONGRATULATIONS);
 						break;
 					}
-				} catch (NumberFormatException e) {
+				} catch (GuessException e) {
 					System.out.println(e.getMessage());
 				}
 			}
@@ -48,13 +50,13 @@ public class CodeBreakerGameLauncher {
 			secreteCode = args[0];
 		return secreteCode;
 	}
-	
+
 	public static void main(String[] args) {
 		try {
 			System.out.println(Messages.INITIALIZING_GAME);
 			String secreteCode = getSecretCode(args);
 			new CodeBreakerGameLauncher(secreteCode).launch();
-		} catch (NumberFormatException e) {
+		} catch (GameException e) {
 			System.out.println(e.getMessage());
 		}
 	}

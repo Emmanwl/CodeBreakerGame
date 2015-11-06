@@ -1,6 +1,6 @@
 package net.arolla.codeBreaker.match;
 
-import java.util.Map;
+import java.util.TreeMap;
 
 /**
  * @author Emmanuel
@@ -8,10 +8,10 @@ import java.util.Map;
  */
 public class ResponseFormatter {
 
-	private final Map<Integer, MatchType> results;
+	private final TreeMap<Integer, MatchType> results;
 	private final int expectedMatchSize;
 
-	public ResponseFormatter(Map<Integer, MatchType> results, int expectedMatchSize) {
+	public ResponseFormatter(TreeMap<Integer, MatchType> results, int expectedMatchSize) {
 		this.results = results;
 		this.expectedMatchSize = expectedMatchSize;
 	}

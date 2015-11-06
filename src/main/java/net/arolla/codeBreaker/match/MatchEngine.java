@@ -13,7 +13,11 @@ public class MatchEngine {
 	}
 
 	public ResponseFormatter getResponseFormatter(String guess) {
-		builder.buildAll(guess);
+		builder.init()
+		       .buildUserMatch(guess)
+		       .buildExactMatch()
+		       .buildUserMinusExact()
+		       .buildSecreteMinusExact();
 		return new ResponseFormatter(builder.getResultMatch(), builder.getExpectedMatchSize());
 	}
 }
