@@ -1,23 +1,23 @@
 package net.arolla.codeBreaker.match;
 
+import net.arolla.codeBreaker.response.ResponseFormatter;
+
 /**
  * @author Emmanuel
  *
  */
 public class MatchEngine {
 
-	private final MatchListBuilder builder;
+	private final MatchProcessor processor;
 
 	public MatchEngine(String secreteCode) {
-		this.builder = new MatchListBuilder(secreteCode);
+		this.processor = new MatchProcessor(secreteCode);
 	}
 
 	public ResponseFormatter getResponseFormatter(String guess) {
-		builder.init()
+		processor.init()
 		       .buildUserMatch(guess)
-		       .buildExactMatch()
-		       .buildUserMinusExact()
-		       .buildSecreteMinusExact();
-		return new ResponseFormatter(builder.getResultMatch(), builder.getExpectedMatchSize());
+		       .buildExactMatch();
+		return new ResponseFormatter(processor.getResultMatch(), processor.getExpectedMatchSize());
 	}
 }

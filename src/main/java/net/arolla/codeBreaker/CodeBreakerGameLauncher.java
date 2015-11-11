@@ -5,7 +5,7 @@ import java.util.Scanner;
 
 import net.arolla.codeBreaker.exception.GameException;
 import net.arolla.codeBreaker.exception.GuessException;
-import net.arolla.codeBreaker.match.ResponseFormatter;
+import net.arolla.codeBreaker.response.ResponseFormatter;
 
 /**
  * @author Emmanuel

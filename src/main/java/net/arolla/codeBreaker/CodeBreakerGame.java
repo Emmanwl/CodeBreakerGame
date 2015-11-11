@@ -3,7 +3,7 @@ package net.arolla.codeBreaker;
 import net.arolla.codeBreaker.exception.GameException;
 import net.arolla.codeBreaker.exception.GuessException;
 import net.arolla.codeBreaker.match.MatchEngine;
-import net.arolla.codeBreaker.match.ResponseFormatter;
+import net.arolla.codeBreaker.response.ResponseFormatter;
 
 /**
  * @author Emmanuel

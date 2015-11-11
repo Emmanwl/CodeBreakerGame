@@ -1,6 +1,10 @@
-package net.arolla.codeBreaker.match;
+package net.arolla.codeBreaker.response;
 
+import java.util.Comparator;
+import java.util.Map;
 import java.util.TreeMap;
+
+import net.arolla.codeBreaker.match.MatchType;
 
 /**
  * @author Emmanuel
@@ -8,11 +12,20 @@ import java.util.TreeMap;
  */
 public class ResponseFormatter {
 
+	private final static Comparator<Integer> sortByNaturalOrdering = new Comparator<Integer>() {
+
+		@Override
+		public int compare(Integer i1, Integer i2) {
+			return Integer.compare(i1, i2);
+		}
+	};
+	
 	private final TreeMap<Integer, MatchType> results;
 	private final int expectedMatchSize;
 
-	public ResponseFormatter(TreeMap<Integer, MatchType> results, int expectedMatchSize) {
-		this.results = results;
+	public ResponseFormatter(Map<Integer, MatchType> results, int expectedMatchSize) {
+		this.results = new TreeMap<Integer, MatchType>(sortByNaturalOrdering);
+		this.results.putAll(results);
 		this.expectedMatchSize = expectedMatchSize;
 	}
 
