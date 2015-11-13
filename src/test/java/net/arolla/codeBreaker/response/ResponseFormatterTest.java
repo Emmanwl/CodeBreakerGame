@@ -12,7 +12,7 @@ import java.util.TreeMap;
 import org.junit.Test;
 
 import net.arolla.codeBreaker.match.Match;
-import net.arolla.codeBreaker.match.MatchType;
+import net.arolla.codeBreaker.match.Match.MatchType;
 
 public class ResponseFormatterTest {
 
@@ -49,5 +49,5 @@ public class ResponseFormatterTest {
 		}
 		return results;
 	}
-
+	
 }

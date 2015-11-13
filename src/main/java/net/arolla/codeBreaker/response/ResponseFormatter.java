@@ -4,7 +4,7 @@ import java.util.Comparator;
 import java.util.Map;
 import java.util.TreeMap;
 
-import net.arolla.codeBreaker.match.MatchType;
+import net.arolla.codeBreaker.match.Match.MatchType;
 
 /**
  * @author Emmanuel

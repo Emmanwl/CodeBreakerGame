@@ -7,7 +7,7 @@ import org.junit.Test;
 
 import net.arolla.codeBreaker.exception.GameException;
 import net.arolla.codeBreaker.exception.GuessException;
-import net.arolla.codeBreaker.match.MatchType;
+import net.arolla.codeBreaker.match.Match.MatchType;
 
 /**
  * 

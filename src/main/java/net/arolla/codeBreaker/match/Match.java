@@ -14,6 +14,25 @@ public final class Match {
 		this.value = value;
 	}
 
+	public enum MatchType {
+
+		EXACT("+"), DIGIT("-");
+
+		private final String symbol;
+
+		private MatchType(String symbol) {
+			this.symbol = symbol;
+		}
+
+		public String getSymbol() {
+			return this.symbol;
+		}
+
+		public boolean isExact() {
+			return EXACT.equals(this);
+		}
+	}
+	
 	public int getPosition() {
 		return this.position;
 	}

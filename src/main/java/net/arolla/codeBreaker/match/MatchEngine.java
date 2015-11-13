@@ -8,16 +8,15 @@ import net.arolla.codeBreaker.response.ResponseFormatter;
  */
 public class MatchEngine {
 
-	private final MatchProcessor processor;
+	private final MatchResponse response;
 
 	public MatchEngine(String secreteCode) {
-		this.processor = new MatchProcessor(secreteCode);
+		this.response = new MatchResponse(secreteCode);
 	}
 
 	public ResponseFormatter getResponseFormatter(String guess) {
-		processor.init()
-		       .buildUserMatch(guess)
-		       .buildExactMatch();
-		return new ResponseFormatter(processor.getResultMatch(), processor.getExpectedMatchSize());
+		response.build(guess);
+		return new ResponseFormatter(response.getResults(), response.getExpectedMatchSize());
 	}
+
 }
