@@ -42,6 +42,16 @@ public class MatchFilterTest {
 	}
 	
 	@Test
+	public void should_map_exact_match_over_digit_match() {
+		List<Match> word =  Arrays.asList(new Match(0, 2), new Match(1, 2), new Match(2, 5), new Match(3, 3));
+		Map<Match, MatchType> map = new HashMap<>();
+		map.put(word.get(1), MatchType.EXACT);
+		map.put(word.get(2), MatchType.DIGIT);
+		map.put(word.get(3), MatchType.DIGIT);
+		assertEquals(map, filter.set(word).filterAccordingType(MatchType.DIGIT).filterAccordingType(MatchType.EXACT).getResults());
+	}
+	
+	@Test
 	public void should_map_any_match() {
 		List<Match> word = Arrays.asList(new Match(0, 1), new Match(1, 3), new Match(2, 2), new Match(3, 5));
 		Map<Match, MatchType> map = new HashMap<>();

@@ -20,8 +20,7 @@ public class CodeBreakerLauncher {
 	}
 
 	private void launch() {
-		Scanner reader = new Scanner(System.in);
-		try {
+		try (Scanner reader = new Scanner(System.in)) {
 			while (true) {
 				System.out.println(Messages.ENTER_A_FOUR_DIGIT_NUMBER);
 
@@ -37,8 +36,6 @@ public class CodeBreakerLauncher {
 					System.out.println(e.getMessage());
 				}
 			}
-		} finally {
-			reader.close();
 		}
 	}
 

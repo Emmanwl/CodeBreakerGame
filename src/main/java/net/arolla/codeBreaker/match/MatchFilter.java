@@ -48,27 +48,25 @@ public class MatchFilter {
 		word.removeIf(new Predicate<Match>() {
 
 			@Override
-			public boolean test(final Match u) {
+			public boolean test(final Match w) {
 
 				boolean b = secrete.removeIf(new Predicate<Match>() {
 
 					@Override
 					public boolean test(final Match s) {
-						return assertEqualsAccordingMatchType(u, s, matchType);
+						if (MatchType.DIGIT.equals(matchType))
+							return w.equalsInValueOnly(s) && !word.contains(s);
+						else
+							return w.equalsInValueAndPosition(s);
 					}
 				});
 
 				if (b)
-					results.put(u, matchType);
+					results.put(w, matchType);
 
 				return b;
 			}
 		});
 		return results;
 	}
-
-	private boolean assertEqualsAccordingMatchType(Match u, Match s, MatchType matchType) {
-		return (MatchType.EXACT.equals(matchType) ? u.equalsInValueAndPosition(s) : u.equalsInValueOnly(s));
-	}
-
 }
