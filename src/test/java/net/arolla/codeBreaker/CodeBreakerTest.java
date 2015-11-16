@@ -14,13 +14,13 @@ import net.arolla.codeBreaker.match.Match.MatchType;
  * @author Emmanuel
  *
  */
-public class CodeBreakerGameTest {
+public class CodeBreakerTest {
 
-	private CodeBreakerGame game;
+	private CodeBreaker game;
 
 	@Before
 	public void init() throws Exception {
-		this.game = new CodeBreakerGame("1234");
+		this.game = new CodeBreaker("1234");
 	}
 
 	@Test
@@ -58,7 +58,7 @@ public class CodeBreakerGameTest {
 
 	@Test(expected = GameException.class)
 	public void should_raise_a_game_exception_at_initialization_time() throws Exception {
-		new CodeBreakerGame("0000");
+		new CodeBreaker("0000");
 	}
 
 	@Test(expected = GuessException.class)

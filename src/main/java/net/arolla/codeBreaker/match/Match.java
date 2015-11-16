@@ -1,5 +1,7 @@
 package net.arolla.codeBreaker.match;
 
+import java.util.Objects;
+
 /**
  * @author Emmanuel
  * 
@@ -37,21 +39,17 @@ public final class Match {
 		return this.position;
 	}
 
-	public boolean equalsInValue(Match obj) {
-		return (value == obj.value);
+	public boolean equalsInValueOnly(Match obj) {
+		return !Objects.equals(position, obj.position) && Objects.equals(value, obj.value);
 	}
 
 	public boolean equalsInValueAndPosition(Match obj) {
-		return (position == obj.position && value == obj.value);
+		return Objects.equals(position, obj.position) && Objects.equals(value, obj.value);
 	}
 
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + position;
-		result = prime * result + value;
-		return result;
+		return Objects.hash(position, value);
 	}
 
 	@Override

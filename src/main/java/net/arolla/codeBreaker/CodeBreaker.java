@@ -10,11 +10,11 @@ import net.arolla.codeBreaker.response.ResponseFormatter;
  * @author Emmanuel
  * 
  */
-public class CodeBreakerGame {
+public class CodeBreaker {
 
 	private final MatchEngine engine;
 	
-	public CodeBreakerGame(String secreteCode) throws GameException {
+	public CodeBreaker(String secreteCode) throws GameException {
 		if (!MatchBuilder.isValid(secreteCode))
 			throw new GameException(Messages.SECRETE_CODE_IS_NOT_A_VALID_FOUR_DIGIT_NUMBER);
 		this.engine = new MatchEngine(secreteCode);

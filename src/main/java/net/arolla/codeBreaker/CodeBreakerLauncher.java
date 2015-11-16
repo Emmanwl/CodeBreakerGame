@@ -11,12 +11,12 @@ import net.arolla.codeBreaker.response.ResponseFormatter;
  * @author Emmanuel
  * 
  */
-public class CodeBreakerGameLauncher {
+public class CodeBreakerLauncher {
 
-	private final CodeBreakerGame game;
+	private final CodeBreaker game;
 
-	private CodeBreakerGameLauncher(String secreteCode) throws GameException {
-		this.game = new CodeBreakerGame(secreteCode);
+	private CodeBreakerLauncher(String secreteCode) throws GameException {
+		this.game = new CodeBreaker(secreteCode);
 	}
 
 	private void launch() {
@@ -55,7 +55,7 @@ public class CodeBreakerGameLauncher {
 		try {
 			System.out.println(Messages.INITIALIZING_GAME);
 			String secreteCode = getSecretCode(args);
-			new CodeBreakerGameLauncher(secreteCode).launch();
+			new CodeBreakerLauncher(secreteCode).launch();
 		} catch (GameException e) {
 			System.out.println(e.getMessage());
 		}
