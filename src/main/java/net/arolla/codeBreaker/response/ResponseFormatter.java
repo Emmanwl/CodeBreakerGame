@@ -44,7 +44,7 @@ public class ResponseFormatter {
 		if (results.values().size() != expectedMatchSize)
 			return false;
 		for (MatchType matchType : results.values()) {
-			if (!matchType.isExact())
+			if (!MatchType.EXACT.equals(matchType))
 				return false;
 		}
 		return true;

@@ -1,6 +1,10 @@
 package net.arolla.codeBreaker.match;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.Objects;
+import java.util.function.Predicate;
 
 /**
  * @author Emmanuel
@@ -30,8 +34,32 @@ public final class Match {
 			return this.symbol;
 		}
 
-		public boolean isExact() {
-			return EXACT.equals(this);
+		Map<Match, MatchType> filterAccordingly(final List<Match> word, final List<Match> secrete) {
+			final Map<Match, MatchType> results = new HashMap<>();
+
+			word.removeIf(new Predicate<Match>() {
+
+				@Override
+				public boolean test(final Match w) {
+
+					boolean b = secrete.removeIf(new Predicate<Match>() {
+
+						@Override
+						public boolean test(final Match s) {
+							if (MatchType.DIGIT.equals(MatchType.this))
+								return w.equalsInValueOnly(s) && !word.contains(s);
+							else
+								return w.equalsInValueAndPosition(s);
+						}
+					});
+
+					if (b)
+						results.put(w, MatchType.this);
+
+					return b;
+				}
+			});
+			return results;
 		}
 	}
 	
@@ -39,11 +67,11 @@ public final class Match {
 		return this.position;
 	}
 
-	public boolean equalsInValueOnly(Match obj) {
+	private boolean equalsInValueOnly(Match obj) {
 		return !Objects.equals(position, obj.position) && Objects.equals(value, obj.value);
 	}
 
-	public boolean equalsInValueAndPosition(Match obj) {
+	private boolean equalsInValueAndPosition(Match obj) {
 		return Objects.equals(position, obj.position) && Objects.equals(value, obj.value);
 	}
 

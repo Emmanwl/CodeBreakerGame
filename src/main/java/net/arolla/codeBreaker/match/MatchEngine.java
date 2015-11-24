@@ -22,8 +22,8 @@ public class MatchEngine {
 	}
 
 	public ResponseFormatter getResponseFormatter(String guess) {
-		filter.set(builder.getWordMatch(guess)).filterAccordingType(MatchType.DIGIT)
-		                                       .filterAccordingType(MatchType.EXACT);
+		filter.from(builder.getWordMatch(guess)).filterAccordingly(MatchType.DIGIT)
+		                                        .filterAccordingly(MatchType.EXACT);
 		return new ResponseFormatter(filter.getResults(), secrete.size());
 	}
 }
