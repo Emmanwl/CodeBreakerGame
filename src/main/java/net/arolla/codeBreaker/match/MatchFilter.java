@@ -10,7 +10,6 @@ import net.arolla.codeBreaker.match.Match.MatchType;
 public class MatchFilter {
 
 	private Map<Match, MatchType> map;
-	private boolean initialized;
 	private List<Match> secrete;
 	private List<Match> match;
 	private List<Match> word;
@@ -23,19 +22,18 @@ public class MatchFilter {
 		this.secrete = new ArrayList<>(match);
 		this.word = new ArrayList<>(word);
 		this.map = new HashMap<>();
-		this.initialized = true;
 		return this;
 	}
 
 	public MatchFilter filterAccordingly(MatchType matchType) {
-		if (!initialized)
+		if (map == null)
 			throw new IllegalStateException();
 		this.map.putAll(matchType.filterAccordingly(word, secrete));
 		return this;
 	}
 
 	public Map<Match, MatchType> getResults() {
-		if (!initialized)
+		if (map == null)
 			throw new IllegalStateException();
 		return this.map;
 	}

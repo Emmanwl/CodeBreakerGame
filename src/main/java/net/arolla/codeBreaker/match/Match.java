@@ -34,30 +34,22 @@ public final class Match {
 			return this.symbol;
 		}
 
+		private boolean isEqualAccordingly(Match w, Match s, List<Match> word) {
+			if (MatchType.DIGIT.equals(this))
+				return w.equalsInValueOnly(s) && !word.contains(s);
+			else
+				return w.equalsInValueAndPosition(s);
+		}
+
 		Map<Match, MatchType> filterAccordingly(final List<Match> word, final List<Match> secrete) {
 			final Map<Match, MatchType> results = new HashMap<>();
 
-			word.removeIf(new Predicate<Match>() {
-
-				@Override
-				public boolean test(final Match w) {
-
-					boolean b = secrete.removeIf(new Predicate<Match>() {
-
-						@Override
-						public boolean test(final Match s) {
-							if (MatchType.DIGIT.equals(MatchType.this))
-								return w.equalsInValueOnly(s) && !word.contains(s);
-							else
-								return w.equalsInValueAndPosition(s);
-						}
-					});
+			word.removeIf(w -> {
+					boolean b = secrete.removeIf(s -> isEqualAccordingly(w, s, word));
 
 					if (b)
 						results.put(w, MatchType.this);
-
 					return b;
-				}
 			});
 			return results;
 		}

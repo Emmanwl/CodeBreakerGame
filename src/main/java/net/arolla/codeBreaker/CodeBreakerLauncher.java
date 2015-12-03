@@ -13,6 +13,8 @@ import net.arolla.codeBreaker.response.ResponseFormatter;
  */
 public class CodeBreakerLauncher {
 
+	private final static int MAX_GUESS_VALUE = 9999;
+	private final static int MIN_GUESS_VALUE = 1000;
 	private final CodeBreaker game;
 
 	private CodeBreakerLauncher(String secreteCode) throws GameException {
@@ -42,7 +44,7 @@ public class CodeBreakerLauncher {
 	private static String getSecretCode(String[] args) {
 		String secreteCode;
 		if (args.length == 0)
-			secreteCode = Integer.toString(new Random().nextInt(9999 - 1000 + 1) + 1000);
+			secreteCode = Integer.toString(new Random().nextInt(MAX_GUESS_VALUE - MIN_GUESS_VALUE + 1) + MIN_GUESS_VALUE);
 		else
 			secreteCode = args[0];
 		return secreteCode;
