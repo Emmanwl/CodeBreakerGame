@@ -1,20 +1,16 @@
 package net.arolla.codeBreaker.match;
 
-import java.util.Comparator;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Objects;
+import java.util.function.Predicate;
 
 /**
  * @author Emmanuel
  * 
  */
 public final class Match {
-
-	public final static Comparator<Match> sortByPosition = new Comparator<Match>() {
-
-		@Override
-		public int compare(Match m1, Match m2) {
-			return Integer.compare(m1.getPosition(), m2.getPosition());
-		}
-	};
 
 	private final int position;
 	private final int value;
@@ -24,29 +20,56 @@ public final class Match {
 		this.value = value;
 	}
 
+	public enum MatchType {
+
+		EXACT("+"), DIGIT("-");
+
+		private final String symbol;
+
+		private MatchType(String symbol) {
+			this.symbol = symbol;
+		}
+
+		public String getSymbol() {
+			return this.symbol;
+		}
+
+		private boolean isEqualAccordingly(Match w, Match s, List<Match> word) {
+			if (MatchType.DIGIT.equals(this))
+				return w.equalsInValueOnly(s) && !word.contains(s);
+			else
+				return w.equalsInValueAndPosition(s);
+		}
+
+		Map<Match, MatchType> filterAccordingly(final List<Match> word, final List<Match> secrete) {
+			final Map<Match, MatchType> results = new HashMap<>();
+
+			word.removeIf(w -> {
+					boolean b = secrete.removeIf(s -> isEqualAccordingly(w, s, word));
+
+					if (b)
+						results.put(w, MatchType.this);
+					return b;
+			});
+			return results;
+		}
+	}
+	
 	public int getPosition() {
 		return this.position;
 	}
 
-	public int getValue() {
-		return this.value;
+	private boolean equalsInValueOnly(Match obj) {
+		return !Objects.equals(position, obj.position) && Objects.equals(value, obj.value);
 	}
 
-	public boolean equalsInValue(Match obj) {
-		return (value == obj.value);
-	}
-
-	public boolean equalsInValueAndPosition(Match obj) {
-		return (position == obj.position && value == obj.value);
+	private boolean equalsInValueAndPosition(Match obj) {
+		return Objects.equals(position, obj.position) && Objects.equals(value, obj.value);
 	}
 
 	@Override
 	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + position;
-		result = prime * result + value;
-		return result;
+		return Objects.hash(position, value);
 	}
 
 	@Override
@@ -64,5 +87,4 @@ public final class Match {
 	public String toString() {
 		return position + " # " + value;  
 	}
-
 }

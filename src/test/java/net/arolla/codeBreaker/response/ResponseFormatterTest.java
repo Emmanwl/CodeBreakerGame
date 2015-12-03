@@ -1,4 +1,4 @@
-package net.arolla.codeBreaker.match;
+package net.arolla.codeBreaker.response;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -11,17 +11,20 @@ import java.util.Map;
 
 import org.junit.Test;
 
+import net.arolla.codeBreaker.match.Match;
+import net.arolla.codeBreaker.match.Match.MatchType;
+
 public class ResponseFormatterTest {
 
 	@Test
-	public void should_generate_a_matchable_response() {
+	public void should_generate_a_valid_response() {
 		Map<Match, MatchType> results = getResultsMatchingWith(MatchType.EXACT);
 		ResponseFormatter response = new ResponseFormatter(results, results.size());
 		assertTrue(response.matches());
 	}
 	
 	@Test
-	public void should_generate_an_unmatchable_response_since_there_is_at_least_one_digit_match() {
+	public void should_generate_an_invalid_response_since_there_is_at_least_one_digit_match() {
 		Map<Match, MatchType> results = getResultsMatchingWith(MatchType.EXACT);
 		Iterator<Map.Entry<Match, MatchType>> iterator = results.entrySet().iterator();
 		if (iterator.hasNext()) {
@@ -32,7 +35,7 @@ public class ResponseFormatterTest {
 	}	
 	
 	@Test
-	public void should_generate_an_unmatchable_response_since_a_digit_has_not_been_matched() {
+	public void should_generate_an_invalid_response_since_a_digit_has_not_been_matched() {
 		Map<Match, MatchType> results = getResultsMatchingWith(MatchType.EXACT);
 		ResponseFormatter response = new ResponseFormatter(results, results.size() - 1);
 		assertFalse(response.matches());
@@ -46,5 +49,5 @@ public class ResponseFormatterTest {
 		}
 		return results;
 	}
-
+	
 }
