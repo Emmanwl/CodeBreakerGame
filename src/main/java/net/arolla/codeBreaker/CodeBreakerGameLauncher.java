@@ -10,9 +10,15 @@ import net.arolla.codeBreaker.match.ResponseFormatter;
  */
 public class CodeBreakerGameLauncher {
 
+<<<<<<< HEAD:src/main/java/net/arolla/codeBreaker/CodeBreakerGameLauncher.java
 	private static final String DEFAULT_SECRET_CODE = "9999";
 	
 	private final CodeBreakerGame game;
+=======
+	private final static int MAX_GUESS_VALUE = 9999;
+	private final static int MIN_GUESS_VALUE = 1000;
+	private final CodeBreaker game;
+>>>>>>> dd09c5f... Add lambdas:src/main/java/net/arolla/codeBreaker/CodeBreakerLauncher.java
 
 	private CodeBreakerGameLauncher(String secreteCode) {
 		this.game = new CodeBreakerGame(secreteCode);
@@ -42,7 +48,16 @@ public class CodeBreakerGameLauncher {
 	}
 
 	private static String getSecretCode(String[] args) {
+<<<<<<< HEAD:src/main/java/net/arolla/codeBreaker/CodeBreakerGameLauncher.java
 		return (args.length > 0 ? args[0] : DEFAULT_SECRET_CODE);
+=======
+		String secreteCode;
+		if (args.length == 0)
+			secreteCode = Integer.toString(new Random().nextInt(MAX_GUESS_VALUE - MIN_GUESS_VALUE + 1) + MIN_GUESS_VALUE);
+		else
+			secreteCode = args[0];
+		return secreteCode;
+>>>>>>> dd09c5f... Add lambdas:src/main/java/net/arolla/codeBreaker/CodeBreakerLauncher.java
 	}
 	
 	public static void main(String[] args) {

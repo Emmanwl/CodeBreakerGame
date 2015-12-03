@@ -24,6 +24,44 @@ public final class Match {
 		this.value = value;
 	}
 
+<<<<<<< HEAD
+=======
+	public enum MatchType {
+
+		EXACT("+"), DIGIT("-");
+
+		private final String symbol;
+
+		private MatchType(String symbol) {
+			this.symbol = symbol;
+		}
+
+		public String getSymbol() {
+			return this.symbol;
+		}
+
+		private boolean isEqualAccordingly(Match w, Match s, List<Match> word) {
+			if (MatchType.DIGIT.equals(this))
+				return w.equalsInValueOnly(s) && !word.contains(s);
+			else
+				return w.equalsInValueAndPosition(s);
+		}
+
+		Map<Match, MatchType> filterAccordingly(final List<Match> word, final List<Match> secrete) {
+			final Map<Match, MatchType> results = new HashMap<>();
+
+			word.removeIf(w -> {
+					boolean b = secrete.removeIf(s -> isEqualAccordingly(w, s, word));
+
+					if (b)
+						results.put(w, MatchType.this);
+					return b;
+			});
+			return results;
+		}
+	}
+	
+>>>>>>> dd09c5f... Add lambdas
 	public int getPosition() {
 		return this.position;
 	}
