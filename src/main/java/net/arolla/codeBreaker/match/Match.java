@@ -33,7 +33,7 @@ public final class Match {
          return this.symbol;
       }
 
-      Map<Match, MatchType> filterAccordingly(final List<Match> word, final List<Match> secrete) {
+      Map<Match, MatchType> filterAccordingly(List<Match> word, List<Match> secrete) {
          Map<Match, MatchType> results = new HashMap<>();
 
          word.removeIf(w -> {
