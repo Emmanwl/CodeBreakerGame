@@ -1,32 +1,28 @@
 package net.arolla.codeBreaker;
 
+import java.util.Random;
 import java.util.Scanner;
 
-import net.arolla.codeBreaker.match.ResponseFormatter;
+import net.arolla.codeBreaker.exception.GameException;
+import net.arolla.codeBreaker.exception.GuessException;
+import net.arolla.codeBreaker.response.ResponseFormatter;
 
 /**
  * @author Emmanuel
  * 
  */
-public class CodeBreakerGameLauncher {
+public class CodeBreakerLauncher {
 
-<<<<<<< HEAD:src/main/java/net/arolla/codeBreaker/CodeBreakerGameLauncher.java
-	private static final String DEFAULT_SECRET_CODE = "9999";
-	
-	private final CodeBreakerGame game;
-=======
 	private final static int MAX_GUESS_VALUE = 9999;
 	private final static int MIN_GUESS_VALUE = 1000;
 	private final CodeBreaker game;
->>>>>>> dd09c5f... Add lambdas:src/main/java/net/arolla/codeBreaker/CodeBreakerLauncher.java
 
-	private CodeBreakerGameLauncher(String secreteCode) {
-		this.game = new CodeBreakerGame(secreteCode);
+	private CodeBreakerLauncher(String secreteCode) throws GameException {
+		this.game = new CodeBreaker(secreteCode);
 	}
 
 	private void launch() {
-		Scanner reader = new Scanner(System.in);
-		try {
+		try (Scanner reader = new Scanner(System.in)) {
 			while (true) {
 				System.out.println(Messages.ENTER_A_FOUR_DIGIT_NUMBER);
 
@@ -38,34 +34,28 @@ public class CodeBreakerGameLauncher {
 						System.out.println(Messages.CONGRATULATIONS);
 						break;
 					}
-				} catch (NumberFormatException e) {
+				} catch (GuessException e) {
 					System.out.println(e.getMessage());
 				}
 			}
-		} finally {
-			reader.close();
 		}
 	}
 
 	private static String getSecretCode(String[] args) {
-<<<<<<< HEAD:src/main/java/net/arolla/codeBreaker/CodeBreakerGameLauncher.java
-		return (args.length > 0 ? args[0] : DEFAULT_SECRET_CODE);
-=======
 		String secreteCode;
 		if (args.length == 0)
 			secreteCode = Integer.toString(new Random().nextInt(MAX_GUESS_VALUE - MIN_GUESS_VALUE + 1) + MIN_GUESS_VALUE);
 		else
 			secreteCode = args[0];
 		return secreteCode;
->>>>>>> dd09c5f... Add lambdas:src/main/java/net/arolla/codeBreaker/CodeBreakerLauncher.java
 	}
-	
+
 	public static void main(String[] args) {
 		try {
 			System.out.println(Messages.INITIALIZING_GAME);
 			String secreteCode = getSecretCode(args);
-			new CodeBreakerGameLauncher(secreteCode).launch();
-		} catch (NumberFormatException e) {
+			new CodeBreakerLauncher(secreteCode).launch();
+		} catch (GameException e) {
 			System.out.println(e.getMessage());
 		}
 	}
