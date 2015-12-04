@@ -11,42 +11,35 @@ import net.arolla.codeBreaker.match.Match.MatchType;
 
 /**
  * @author Emmanuel
- *
  */
 public class ResponseFormatter {
 
-	private final static Comparator<Match> sortByNaturalOrdering = new Comparator<Match>() {
+   private final static Comparator<Match> sortByNaturalOrdering = (m1, m2) -> Integer.compare(m1.getPosition(), m2.getPosition());
 
-		@Override
-		public int compare(Match m1, Match m2) {
-			return Integer.compare(m1.getPosition(), m2.getPosition());
-		}
-	};
-	
-	private final Map<Match, MatchType> results;
-	private final int expectedMatchSize;
+   private final Map<Match, MatchType> results;
+   private final int expectedMatchSize;
 
-	public ResponseFormatter(Map<Match, MatchType> results, int expectedMatchSize) {
-		this.results = results;
-		this.expectedMatchSize = expectedMatchSize;
-	}
+   public ResponseFormatter(Map<Match, MatchType> results, int expectedMatchSize) {
+      this.results = results;
+      this.expectedMatchSize = expectedMatchSize;
+   }
 
-	public String getMessage() {
-		StringBuilder sb = new StringBuilder();
-		List<Match> list = new ArrayList<>(results.keySet());
-		Collections.sort(list, sortByNaturalOrdering);
-		for (Match m : list)
-			sb.append(results.get(m).getSymbol());
-		return sb.toString();
-	}
+   public String getMessage() {
+      StringBuilder sb = new StringBuilder();
+      List<Match> list = new ArrayList<>(results.keySet());
+      Collections.sort(list, sortByNaturalOrdering);
+      for (Match m : list)
+         sb.append(results.get(m).getSymbol());
+      return sb.toString();
+   }
 
-	public boolean matches() {
-		if (results.values().size() != expectedMatchSize)
-			return false;
-		for (MatchType matchType : results.values()) {
-			if (!MatchType.EXACT.equals(matchType))
-				return false;
-		}
-		return true;
-	}
+   public boolean matches() {
+      if (results.values().size() != expectedMatchSize)
+         return false;
+      for (MatchType matchType : results.values()) {
+         if (!MatchType.EXACT.equals(matchType))
+            return false;
+      }
+      return true;
+   }
 }
