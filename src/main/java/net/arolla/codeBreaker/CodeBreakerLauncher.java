@@ -7,9 +7,6 @@ import net.arolla.codeBreaker.exception.GameException;
 import net.arolla.codeBreaker.exception.GuessException;
 import net.arolla.codeBreaker.response.ResponseFormatter;
 
-/**
- * @author Emmanuel
- */
 public class CodeBreakerLauncher {
 
    private final static int MAX_GUESS_VALUE = 9999;
@@ -42,10 +39,12 @@ public class CodeBreakerLauncher {
 
    private static String getSecretCode(String[] args) {
       String secreteCode;
-      if (args.length == 0)
+      if (args.length == 0) {
          secreteCode = Integer.toString(new Random().nextInt(MAX_GUESS_VALUE - MIN_GUESS_VALUE + 1) + MIN_GUESS_VALUE);
-      else
+      }
+      else {
          secreteCode = args[0];
+      }
       return secreteCode;
    }
 

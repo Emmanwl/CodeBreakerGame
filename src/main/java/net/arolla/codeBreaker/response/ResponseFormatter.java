@@ -9,12 +9,9 @@ import java.util.Map;
 import net.arolla.codeBreaker.match.Match;
 import net.arolla.codeBreaker.match.Match.MatchType;
 
-/**
- * @author Emmanuel
- */
 public class ResponseFormatter {
 
-   private final static Comparator<Match> sortByNaturalOrdering = (m1, m2) -> Integer.compare(m1.getPosition(), m2.getPosition());
+   private final static Comparator<Match> SORT_BY_NATURAL_ORDERING = (m1, m2) -> Integer.compare(m1.getPosition(), m2.getPosition());
 
    private final Map<Match, MatchType> results;
    private final int expectedMatchSize;
@@ -27,18 +24,21 @@ public class ResponseFormatter {
    public String getMessage() {
       StringBuilder sb = new StringBuilder();
       List<Match> list = new ArrayList<>(results.keySet());
-      Collections.sort(list, sortByNaturalOrdering);
-      for (Match m : list)
+      Collections.sort(list, SORT_BY_NATURAL_ORDERING);
+      for (Match m : list) {
          sb.append(results.get(m).getSymbol());
+      }
       return sb.toString();
    }
 
    public boolean matches() {
-      if (results.values().size() != expectedMatchSize)
+      if (results.values().size() != expectedMatchSize) {
          return false;
+      }
       for (MatchType matchType : results.values()) {
-         if (!MatchType.EXACT.equals(matchType))
+         if (!MatchType.EXACT.equals(matchType)) {
             return false;
+         }
       }
       return true;
    }

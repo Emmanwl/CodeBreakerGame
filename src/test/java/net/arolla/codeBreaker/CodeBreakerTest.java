@@ -3,21 +3,20 @@ package net.arolla.codeBreaker;
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import net.arolla.codeBreaker.exception.GameException;
 import net.arolla.codeBreaker.exception.GuessException;
 import net.arolla.codeBreaker.match.Match.MatchType;
 
-/**
- * @author Emmanuel
- */
+
 public class CodeBreakerTest {
 
    private CodeBreaker game;
 
    @Before
-   public void init() throws Exception {
+   public void setUp() throws Exception {
       this.game = new CodeBreaker("1234");
    }
 
@@ -66,8 +65,9 @@ public class CodeBreakerTest {
 
    private String getSymbolSuite(MatchType... matchTypes) {
       StringBuilder sb = new StringBuilder();
-      for (MatchType matchType : matchTypes)
+      for (MatchType matchType : matchTypes) {
          sb.append(matchType.getSymbol());
+      }
       return sb.toString();
    }
 }

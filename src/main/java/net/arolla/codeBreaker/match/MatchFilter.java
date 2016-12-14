@@ -26,15 +26,17 @@ public class MatchFilter {
    }
 
    public MatchFilter filterAccordingly(MatchType matchType) {
-      if (map == null)
+      if (map == null) {
          throw new IllegalStateException();
+      }
       this.map.putAll(matchType.filterAccordingly(word, secrete));
       return this;
    }
 
    public Map<Match, MatchType> getResults() {
-      if (map == null)
+      if (map == null) {
          throw new IllegalStateException();
+      }
       return this.map;
    }
 }

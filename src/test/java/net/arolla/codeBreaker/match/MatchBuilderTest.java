@@ -15,7 +15,7 @@ public class MatchBuilderTest {
    private MatchBuilder builder;
 
    @Before
-   public void init() {
+   public void setUp() {
       this.builder = new MatchBuilder();
    }
 

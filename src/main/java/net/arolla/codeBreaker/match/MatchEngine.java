@@ -5,9 +5,6 @@ import java.util.List;
 import net.arolla.codeBreaker.match.Match.MatchType;
 import net.arolla.codeBreaker.response.ResponseFormatter;
 
-/**
- * @author Emmanuel
- */
 public class MatchEngine {
 
    private final MatchBuilder builder;

@@ -1,8 +1,5 @@
 package net.arolla.codeBreaker;
 
-/**
- * @author Emmanuel
- */
 public class Messages {
 
    public static final String INITIALIZING_GAME = "Launching game...";

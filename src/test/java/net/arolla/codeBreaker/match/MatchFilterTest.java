@@ -17,7 +17,7 @@ public class MatchFilterTest {
    private MatchFilter filter;
 
    @Before
-   public void init() {
+   public void setUp() {
       this.filter = new MatchFilter(Arrays.asList(new Match(0, 1), new Match(1, 2), new Match(2, 3), new Match(3, 5)));
    }
 

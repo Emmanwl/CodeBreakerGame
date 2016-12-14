@@ -19,8 +19,9 @@ public class MatchBuilder {
    public List<Match> getWordMatch(String word) {
       char[] array = word.toCharArray();
       List<Match> list = new ArrayList<>();
-      for (int i = 0; i < array.length; i++)
+      for (int i = 0; i < array.length; i++) {
          list.add(new Match(i, Character.getNumericValue(array[i])));
+      }
       return list;
    }
 }
