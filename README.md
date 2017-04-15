@@ -2,7 +2,6 @@ Code breaking is all about finding the secret code.
 
 When the game starts the player should be able to guess the secret code  by providing a 4 digits number. The game finishes when the player have found the exact match for the secret code.
 
-
 - The game will return a + sign for an exact match
 - The game will return a - sign for a digit match
 - An exact match is a digit that matches a digit of the secret code both in value and in position
